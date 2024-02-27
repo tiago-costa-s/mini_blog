@@ -1,0 +1,13 @@
+import './ErrorPage.css'
+
+const ErrorPage = () => {
+
+    return (
+        <div>
+            <h1>Página de Erro</h1>
+        </div>
+    );
+
+};
+
+export default ErrorPage;
