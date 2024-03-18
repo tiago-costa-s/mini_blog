@@ -8,7 +8,11 @@ import ErrorPage from './routes/errorPage/ErrorPage';
 import About from './routes/about/About.jsx';
 import Login from './routes/login/Login';
 import Register from './routes/register/Register.jsx';
+// context
+import { AuthProvider } from './context/AuthContext.jsx';
+<AuthProvider>
 
+</AuthProvider>
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,11 +25,6 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/about',
-        element: <About />
-      },
-
-      {
         path: '/login',
         element: <Login />
       },
@@ -33,13 +32,22 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />
-      }
+      },
+
+      {
+        path: '/about',
+        element: <About />
+      },
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}>
+      <AuthProvider value={{ user }}>
+        <App />
+      </AuthProvider>
+    </RouterProvider>
   </React.StrictMode>,
 )
