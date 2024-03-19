@@ -12,6 +12,21 @@ import { useAuthentication } from './hooks/useAuthentication';
 
 function App() {
 
+  const [user, setUser] = useState(undefined);
+  const { auth } = useAuthentication();
+
+  const loadingUser = user === undefined;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    })
+  }, [auth]);
+
+  if (loadingUser) {
+    return <p>Carregando...</p>
+  }
+
   return (
     <div className="App">
       <NavBar />
