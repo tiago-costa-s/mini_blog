@@ -1,45 +1,60 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import { useAuthentication } from '../../hooks/useAuthentication';
+import { useAuthValue } from '../../context/AuthContext';
+
 // styles
 import styles from './NavBar.module.css'
 
 const NavBar = () => {
 
+    const { user } = useAuthValue();
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.brand}>
-                <Link to='/' className=''>
-                    {/* Mini */}
+                <NavLink
+                    to='/' className=''>
+                    Mini
                     <span>Blog</span>
-                </Link>
+                </NavLink>
             </div>
             <ul className={styles.links_list}>
                 <li>
-                    <Link to='/'
-                        // className={({ isActive }) => (isActive ? styles.active : "")}
+                    <NavLink
+                        to='/'
+                        className={({ isActive }) => (isActive ? styles.active : "")}
                     >
                         home
-                    </Link>
+                    </NavLink>
                 </li>
+                {!user && (
+                    <>
+                        <li>
+                            <NavLink
+                                to='/login'
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                            >
+                                Entrar
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/register'
+                                className={({ isActive }) => (isActive ? styles.active : "")}
+                            >
+                                Cadastrar
+                            </NavLink>
+                        </li>
+                    </>
+                )}
                 <li>
-                    <Link to='/login'
-                        // className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        Entrar
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/register'
-                        // className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        Cadastrar
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/about'
-                        // className={({ isActive }) => (isActive ? styles.active : "")}
+                    <NavLink
+                        to='/about'
+                        className={({ isActive }) => (isActive ? styles.active : "")}
                     >
                         sobre
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
         </nav>
